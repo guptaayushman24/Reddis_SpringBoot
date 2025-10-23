@@ -20,7 +20,7 @@ public class SignInController {
     @PostMapping("/signin")
     public User SignIn (@RequestBody SIgninRequestdto sIgninRequestdto){
         User user = userService.SignIn(sIgninRequestdto.getEmail(),sIgninRequestdto.getPassword());
-       String userId = user.getId();
+       Integer userId = user.getId();
         loggedInUserContext.setUserId(userId);
         System.out.println("User id is"+" "+userId);
 

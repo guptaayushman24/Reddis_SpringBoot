@@ -12,5 +12,5 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class LoggedInUserContext {
-    private String userId;
+    private Integer userId;
 }

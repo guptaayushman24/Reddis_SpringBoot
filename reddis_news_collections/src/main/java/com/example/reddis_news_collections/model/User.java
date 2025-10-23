@@ -1,15 +1,25 @@
 package com.example.reddis_news_collections.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
 @Data
-@Document(collection  = "UserDetails")
+@Entity
 public class User {
+
     @Id
-    String id;
-    String name;
-    String email;
-    String password;
-    String [] favouritenews;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String name;
+    private String email;
+    private String password;
+    @ElementCollection
+    @CollectionTable(
+            name = "user_favourite_news",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<String> favouritenews;
 }

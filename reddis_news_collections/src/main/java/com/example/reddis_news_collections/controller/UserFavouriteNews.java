@@ -20,6 +20,7 @@ public class UserFavouriteNews {
         // import id from the signin controller
         SignInController signInController = new SignInController();
         System.out.println("User id in User Favourite News"+" "+loggedInUserContext.getUserId());
-        return newsService.getUserFavouriteNews(loggedInUserContext.getUserId());
+        // return newsService.getUserFavouriteNews(loggedInUserContext.getUserId());
+        return null;
     }
 }
