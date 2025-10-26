@@ -16,13 +16,12 @@ public class SignInController {
     UserService userService;
     @Autowired
     LoggedInUserContext loggedInUserContext;
-//    String userId = "";
+    Integer userId = -1;
     @PostMapping("/signin")
     public User SignIn (@RequestBody SIgninRequestdto sIgninRequestdto){
         User user = userService.SignIn(sIgninRequestdto.getEmail(),sIgninRequestdto.getPassword());
        Integer userId = user.getId();
         loggedInUserContext.setUserId(userId);
-        System.out.println("User id is"+" "+userId);
 
         return user;
     }

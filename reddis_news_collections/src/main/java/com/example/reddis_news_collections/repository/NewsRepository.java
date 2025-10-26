@@ -1,22 +1,22 @@
 package com.example.reddis_news_collections.repository;
 
-import com.example.reddis_news_collections.dto.Newsdto;
-//import com.example.reddis_news_collections.model.News;
 import com.example.reddis_news_collections.model.News;
-import com.example.reddis_news_collections.model.User;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface NewsRepository extends MongoRepository<News, String> {
+public interface NewsRepository extends JpaRepository<News, String> {
     List<News> findAll();
     List<News> findByType(String type);
 
-    @Query("{ 'userId': ?0}")
-    List<News> findByfavouritenews (String userId);
+    @Query(
+            value = "SELECT * FROM news WHERE type IN (SELECT favouritenews FROM user_favourite_news WHERE user_id = :userId)",
+            nativeQuery = true
+    )
+    List<News> findByfavouritenews(@Param("userId") Integer userId);
 
 
 }

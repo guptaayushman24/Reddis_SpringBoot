@@ -19,8 +19,10 @@ public class UserFavouriteNews {
     public List<News> getUserFavouriteNews (){
         // import id from the signin controller
         SignInController signInController = new SignInController();
-        System.out.println("User id in User Favourite News"+" "+loggedInUserContext.getUserId());
-        // return newsService.getUserFavouriteNews(loggedInUserContext.getUserId());
-        return null;
+        if (loggedInUserContext.getUserId()==null){
+            return null;
+        }
+         return newsService.getUserFavouriteNews(loggedInUserContext.getUserId());
+
     }
 }

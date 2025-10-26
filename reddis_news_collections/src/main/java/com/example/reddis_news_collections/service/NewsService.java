@@ -4,7 +4,6 @@ import com.example.reddis_news_collections.dto.Newsdto;
 import com.example.reddis_news_collections.model.News;
 import com.example.reddis_news_collections.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class NewsService {
        return newsRepository.findByType(type);
    }
 
-   public List<News> getUserFavouriteNews(String userId){
+   public List<News> getUserFavouriteNews(Integer userId){
        return newsRepository.findByfavouritenews(userId);
    }
 

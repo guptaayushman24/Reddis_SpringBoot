@@ -2,7 +2,6 @@ package com.example.reddis_news_collections.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
