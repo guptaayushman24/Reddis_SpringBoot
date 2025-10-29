@@ -22,17 +22,21 @@ public class ReddisService {
     NewsRepository newsRepository;
 
     @Autowired
-    private RedisTemplate<Integer,Object> redisTemplate;
+    private RedisTemplate<String,List<News>> redisTemplate;
 
 
-    public void saveNews (Integer id, List<String> userFavouriteNewsTopic){
+    public void saveNews (String id, List<News> userFavouriteNewsTopic){
         // Extract User Id
         Integer userId = loggedInUserContext.getUserId();
         // Extract their favourite news topic
-        List<String> newsTopics = newsRepository.userFavouriteNewsTopic(userId);
-        redisTemplate.opsForValue().set(userId, newsTopics, 10, TimeUnit.MINUTES); // Store with a TTL
+        List<News> newsTopics = newsRepository.findByfavouritenews(userId);
+        redisTemplate.opsForValue().set(String.valueOf(userId), newsTopics, 10, TimeUnit.MINUTES); // Store with a TTL
 
 
+    }
+
+    public List<News> retrieveData (String id){
+        return redisTemplate.opsForValue().get(id);
     }
 
 }
