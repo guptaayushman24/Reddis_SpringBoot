@@ -18,5 +18,11 @@ public interface NewsRepository extends JpaRepository<News, String> {
     )
     List<News> findByfavouritenews(@Param("userId") Integer userId);
 
+    @Query(
+            value = "select * from user_favourite_news where user_id = :userId",
+            nativeQuery = true
+    )
+    List<String> userFavouriteNewsTopic(@Param("userId") Integer userId);
+
 
 }
